@@ -8,6 +8,7 @@
 
 body{
     font-family: Poppins, 'sans-serif';
+    background-color: #f0f0f0;
 
 }
 #welcome{
@@ -46,4 +47,28 @@ input[type="submit"]:hover {
 }
 input[type="submit"] {
     font-size: 1rem;
+}
+
+/*styles for landing page*/
+.welcome-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 60%;
+    margin: 0 auto;
+    gap: 20px;
+}
+.welcome-div p{
+    text-align: center;
+}
+.welcome-div a{
+    text-decoration: none;
+    color: #fff;
+    background-color: #3498db;
+    padding: 0.8rem 1.2rem;
+}
+.welcome-div a:hover{
+    background-color: #2185d0;
 }
