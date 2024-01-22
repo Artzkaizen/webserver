@@ -1,14 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
+:root{
+    --primary-bg: #f0f0f0;
+    --primary-btn: #3498db;
+    --secondary-btn: #2185d0;
+    --warn-btn: red;
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Poppins, 'sans-serif';
 }
 
 body{
-    font-family: Poppins, 'sans-serif';
-    background-color: #f0f0f0;
+    background-color: var(--primary-bg);
 
 }
 #welcome{
@@ -32,23 +39,54 @@ body{
     flex-direction: column;
 }
 input{
-    padding: 10px;
+    width: 100%;
+    padding: 1rem;
     margin: 5px;
     border: 1px solid black;
 }
 input[type="submit"] {
-    background-color: #3498db;
+    background-color: var(--primary-btn);
     color: #fff;
     cursor: pointer;
     border: none;
+    border-radius: 3px;
 }
 input[type="submit"]:hover {
-    background-color: #2185d0;
+    background-color: var(--secondary-btn);
 }
 input[type="submit"] {
     font-size: 1rem;
 }
+input::placeholder{
+    font-size: 1rem;
+}
+#password{
+    width: 100%;
+}
+.password-wrapper{
+    position: relative;
+}
+.password-wrapper:hover{
+    cursor: pointer;
+}
+.eye-slash{
+    position: absolute;
+    text-align: center;
+    top: 1.3rem;
+    right: 1rem;
+    display: none;
 
+}
+.eye-open{
+    position: absolute;
+    text-align: center;
+    top: 1.3rem;
+    right: 1rem;
+    display: none;
+}
+.show{
+    display: block;
+}
 /*styles for landing page*/
 .welcome-div{
     display: flex;
@@ -56,7 +94,7 @@ input[type="submit"] {
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     gap: 20px;
 }
@@ -66,9 +104,82 @@ input[type="submit"] {
 .welcome-div a{
     text-decoration: none;
     color: #fff;
-    background-color: #3498db;
+    background-color: var(--primary-btn);
     padding: 0.8rem 1.2rem;
+    border-radius: 3px;
 }
 .welcome-div a:hover{
-    background-color: #2185d0;
+    background-color: var(--secondary-btn);
+}
+.weather-icon:hover{
+    cursor: pointer;
+}
+/*dashboard styles*/
+.nav-bar{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+}
+ul,li{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+li:hover{
+    color: var(--secondary-btn);
+    cursor: pointer;
+    transition: all ease 500ms;
+}
+li img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.logout-btn{
+    background-color: var(--primary-btn);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    border-radius: 3px;
+}
+.logout-btn:hover{
+    background-color: var(--warn-btn);
+    transition: all ease 500ms;
+}
+/*styles the weather temp and icon*/
+.status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon{
+    width: 6rem;
+}
+/* extra dashboard styles*/
+.dashboard-form{
+    margin: 0 auto;
+    width: 50%;
+}
+.dashboard-form h1{
+    font-size: 4rem;
+    text-align: center;
+}
+@media screen and (max-width: 768px)  {
+    .welcome-div{
+        width: 100%;
+        padding: 1rem;
+    }
+    #welcome h1{
+        font-size: 2rem;
+       text-align: center;
+    }
+    .form{
+        width: 70%;
+    }
+    br{
+        display: none;
+    }
 }

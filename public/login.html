@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script defer src="/login-page-scripts/authentification.js"></script>
+    <script defer src="/login-page-scripts/password-toggle.js"></script>
+    <script src="https://kit.fontawesome.com/b3c6a9859a.js" crossorigin="anonymous"></script>
     <title>Weather app</title>
 </head>
 <body>
@@ -11,10 +14,20 @@
         <div class="form-container">
             <h1>Welcome to my website</h1>
             <p>Please login to continue</p>
-            <form class="form" action="/api/login" method="post">
-                <input id="username" type="text" name="name" placeholder="Username">
-                <input id="password" type="password" name="password" placeholder="Password">
-                <input type="submit" value="Login">
+            <form class="form">
+                <input id="username" type="text" name="username" placeholder="Username">
+                <div class="password-wrapper">
+                    <input id="password" type="password" name="password" placeholder="Password">
+                    <div id="password-toggle">
+                         <span class="eye-open">
+                             <i class="fa-solid fa-eye"></i>
+                         </span>
+                         <span class="eye-slash show">
+                             <i class="fa-solid fa-eye-slash"></i>
+                         </span>
+                    </div>
+                </div>
+                <input id="submit" type="submit" value="Login">
             </form>
         </div>
     </section>

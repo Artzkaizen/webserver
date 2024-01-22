@@ -15,6 +15,13 @@ app.get('/home', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'landing-page.html'));
 });
 
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+})
+app.get('/dashboard#', (req, res) => {
+    res.redirect('/home')
+})
+
 
 app.post('/api/login', (req, res) => {
     let hasAunthenticatedUser = false;
@@ -22,20 +29,42 @@ app.post('/api/login', (req, res) => {
 
         const userToCheck = database.users[i];
 
-        if (req.body.name === userToCheck.username && req.body.password === userToCheck.password) {
+        if (req.body.username === userToCheck.username && req.body.password === userToCheck.password) {
             // creates unique for session token login attempt
             const sessionToken = `${userToCheck.username}_${Date.now()}`;
-
-            res.send(sessionToken);
+            // res.redirect('/dashboard')
             hasAunthenticatedUser = true;
             break;
         }
     }
-    if (hasAunthenticatedUser === false){
+    if (!hasAunthenticatedUser){
         res.sendStatus(401)
     }
 })
 
+
+app.get('/api/:username/city', (req, res) => {
+    const username = req.params.username;
+    const foundUser = database.users.find(user => user.username === username);
+
+    if (!foundUser) {
+        res.sendStatus(404);
+        return;
+    }
+
+    res.send(foundUser.city);
+});
+app.get('/api/:username/profile-picture-path', (req, res) => {
+    const username = req.params.username;
+    const foundUser = database.users.find(user => user.username === username);
+
+    if (!foundUser) {
+        res.sendStatus(404);
+        return;
+    }
+
+    res.send(foundUser.profilePicture);
+});
 app.listen(port, () => {
     console.log(`This server is running on ${port}`)
 });
