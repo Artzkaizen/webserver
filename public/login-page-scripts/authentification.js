@@ -6,7 +6,7 @@ form.addEventListener('submit', (event) => {
         const username = document.querySelector("#username").value;
         const password = document.querySelector("#password").value;
 
-        try {
+
             const response = await fetch("/api/login", {
                 method: "POST",
                 headers: {
@@ -15,10 +15,13 @@ form.addEventListener('submit', (event) => {
                 body: "username=" + username + "&password=" + password
             });
 
-            console.log(response)
-        } catch (error) {
-            console.error('Error during authentication:', error.message);
-        }
+            const resData = await response.text()
+
+            if (response.status === 200)
+            {
+                window.location = '/dashboard'
+                document.cookie = `sessionToken=${resData}`;
+            }
     }
     authenticateUser();
 })

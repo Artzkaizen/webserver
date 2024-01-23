@@ -1,5 +1,6 @@
 const database = require("./database.js");
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const path = require('path')
 const app = express();
 const port = 3000;
@@ -7,6 +8,7 @@ const port = 3000;
 // middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser())
 app.get('/', (req, res)  => {
     res.redirect('/home');
 });
@@ -16,7 +18,13 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+
+    if (req.cookies.sessionToken){
+        console.log('works')
+        res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+    } else {
+        res.sendStatus(401)
+    }
 })
 app.get('/dashboard#', (req, res) => {
     res.redirect('/home')
@@ -28,11 +36,12 @@ app.post('/api/login', (req, res) => {
     for(let i = 0; i < database.users.length; i++){
 
         const userToCheck = database.users[i];
+        // res.sendFile(path.join(__dirname, 'public', 'dashboard.html'))
 
         if (req.body.username === userToCheck.username && req.body.password === userToCheck.password) {
             // creates unique for session token login attempt
             const sessionToken = `${userToCheck.username}_${Date.now()}`;
-            // res.redirect('/dashboard')
+            res.send(sessionToken)
             hasAunthenticatedUser = true;
             break;
         }
