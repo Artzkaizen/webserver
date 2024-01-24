@@ -21,6 +21,18 @@ form.addEventListener('submit', (event) => {
             {
                 window.location = '/dashboard'
                 document.cookie = `sessionToken=${resData}`;
+            }else {
+                const inputElements = document.querySelectorAll('.login-error');
+                const loginInfo = document.querySelector('.login-info')
+                inputElements.forEach(input => {
+                    input.style.border = '2px solid red';
+                    loginInfo.innerHTML = 'Please a matching username and password';
+                    loginInfo.style.color = 'red'
+                    input.addEventListener('click', () => {
+                        input.style.border = 'none'
+                    })
+                });
+
             }
     }
     authenticateUser();

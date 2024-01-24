@@ -20,14 +20,14 @@ app.get('/home', (req, res) => {
 app.get('/dashboard', (req, res) => {
 
     if (req.cookies.sessionToken){
-        console.log('works')
         res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
     } else {
-        res.sendStatus(401)
+        res.redirect('/login');
+        res.sendStatus(401);
     }
 })
-app.get('/dashboard#', (req, res) => {
-    res.redirect('/home')
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 })
 
 

@@ -135,6 +135,11 @@ h3{
     font-size: 6rem;
     text-align: center;
 }
+.infos h2{
+    margin: 1rem;
+    font-size: 2rem;
+    text-align: center;
+}
 .infos p{
     font-size: 1.5rem;
     text-align: center;
@@ -167,15 +172,6 @@ h3{
 .location{
     margin: 0 auto;
     text-transform: capitalize;
-}
-.location-box{
-    display: grid;
-    place-items: center;
-    background-color: #f0f0f0;
-    width: 50%;
-    height: 10vh;
-    margin: 0 auto;
-    border-radius: 5px;
 }
 .sun-box{
     display: flex;

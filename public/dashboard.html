@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/dashboard.css">
+
+    <!--Logic-->
+    <script defer src="/dashboard-page-scripts/updateCurentWeatherInformation.js"></script>
+
+    <!--Icons-->
+    <link rel="icon" href="/img/climate.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/b3c6a9859a.js" crossorigin="anonymous"></script>
-    <script defer src="/weather.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
@@ -17,15 +22,14 @@
         </nav>
         <div class="infos">
             <img class="icon" src="/img/clear.png" alt="clear_weather">
+            <h2 class="location">Please Choose a city</h2>
+            <p>Current Weather</p>
             <h1 class="text">24<span class="deg" >&degC</span></h1>
             <p class="time-dt">Monday 17:00</p>
         </div>
         <div class="city-info">
-            <p>Mostly Cloudly</p>
-            <p>Rain - <span>30%</span></p>
-        </div>
-        <div class="location-box">
-            <p class="location">Please Choose a city</p>
+<!--            <p>Mostly Cloudly</p>-->
+<!--            <p>Rain - <span>30%</span></p>-->
         </div>
     </header>
     <main>
@@ -111,7 +115,7 @@
             <div class="s-box">
                 <p>Wind Status</p>
                 <div class="humidity-box">
-                    <p id="wind" class="num-info">7.70<span >km/h</span></p>
+                    <p id="wind" class="num-info">7.70<span >m/h</span></p>
                     <img src="/img/wind.png" alt="wind">
                 </div>
                 <p>WSW</p>
