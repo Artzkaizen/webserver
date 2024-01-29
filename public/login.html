@@ -12,25 +12,31 @@
     <!--Icons -->
     <link rel="icon" href="/img/climate.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/b3c6a9859a.js" crossorigin="anonymous"></script>
-    <title>Weather app</title>
+    <title>Sky view</title>
 </head>
 <body>
     <section id="welcome">
         <div class="form-container">
             <h1>Welcome to my website</h1>
             <p class="login-info">Please login to continue</p>
+            <div>
+                <input id="login" type="submit" value="Login">
+                <input id="create-btn" type="submit" value="Create Account">
+            </div>
+
             <form class="form">
                 <input  id="username" class="login-error" type="text" name="username" placeholder="Username">
                 <div class="password-wrapper">
                     <input id="password" class="login-error" type="password" name="password" placeholder="Password">
                     <div id="password-toggle">
-                         <span class="eye-open">
+                        <span class="eye-open">
                              <i class="fa-solid fa-eye"></i>
                          </span>
-                         <span class="eye-slash show">
+                        <span class="eye-slash show">
                              <i class="fa-solid fa-eye-slash"></i>
                          </span>
                     </div>
+                    <input id="user-city" class="login-error" type="text" name="City" placeholder="City">
                 </div>
                 <input id="submit" type="submit" value="Login">
             </form>

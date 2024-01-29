@@ -86,7 +86,6 @@ async function updateCurrentWeatherInformation(lat, lon) {
         feelsLike.innerHTML= `${Math.round(resData.current.feels_like)}&degC</span>`;
 
     }catch (error) {
-        alert('Please enter a valid city')
         console.error('Error fetching weather:', error.message);
     }
 }
@@ -97,6 +96,7 @@ async function getLocation() {
     const res = await fetch(locationUrl());
     const resData = await res.json();
     if (resData.cod !== 200) {
+        alert('Please enter a valid city');
         return;
     }
 
@@ -104,7 +104,8 @@ async function getLocation() {
     lon = resData.coord.lon;
 
     // displays desired location
-    place.innerHTML = city.value;
+    place.innerHTML = resData.name;
+    console.log(resData.name)
     city.value = '';
 }
 
@@ -121,3 +122,10 @@ city.addEventListener('keydown', (event) => {
         
     }
 });
+
+
+const logoutBtn = document.querySelector('.logout-btn');
+logoutBtn.addEventListener('click', () => {
+    window.location.href = '/home'
+    document.cookie = `sessionToken=; expires=`;
+})

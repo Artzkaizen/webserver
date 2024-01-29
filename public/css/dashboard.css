@@ -83,10 +83,6 @@ li a{
 .text{
     font-size: 6rem;
 }
-.city-info p{
-    text-align: center;
-    margin: 1rem 0;
-}
 .day{
     display: flex;
     gap: 1rem;
@@ -194,4 +190,14 @@ h3{
 .humidity-box img{
    max-width: 40%;
    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    body{
+        width: 0;
+        display: none !important;
+    }
+    .w-box{
+        background-color: red;
+    }
 }
