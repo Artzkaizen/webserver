@@ -1,3 +1,4 @@
 # Webserver
-username: 'Max',
-password: 'win1',
+
+username: 'Max';
+password: 'win1';
