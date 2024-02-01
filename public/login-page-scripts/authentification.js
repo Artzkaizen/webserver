@@ -1,5 +1,4 @@
 const form = document.querySelector('.form');
-
 const city = document.getElementById('user-city');
 form.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -22,6 +21,7 @@ form.addEventListener('submit', (event) => {
             {
                 window.location = '/dashboard'
                 document.cookie = `sessionToken=${resData}`;
+                sessionStorage.setItem("username", username);
             }else {
                 const inputElements = document.querySelectorAll('.login-error');
                 const loginInfo = document.querySelector('.login-info')

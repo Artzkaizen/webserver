@@ -7,7 +7,6 @@
 }
 body{
     display: flex;
-    width: 100vw;
 }
 main{
     width:70%;
@@ -66,6 +65,9 @@ li a{
     color: #fff;
     text-decoration: none;
 }
+/*.img-wrapper{*/
+/*    border: 2px solid red;*/
+/*}*/
 .nav-bar{
     width: 100%;
     background-color: #f0f0f0;
@@ -109,13 +111,10 @@ li a{
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
-
 h3{
     margin: 1rem 0;
 }
 .s-box{
-    /*display: grid;*/
-    /*place-items: center;*/
     background-color: #fff;
     height: 25vh;
     border-radius: 5px;
