@@ -1,4 +1,3 @@
-
 let lat;
 let lon;
 const city = document.querySelector('#city');
@@ -105,25 +104,25 @@ async function getLocation() {
     lon = resData.coord.lon;
 
     // displays desired location
+    sessionStorage
     place.innerHTML = resData.name;
-    console.log(resData.name)
     city.value = '';
 }
 
-city.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.keyCode === 13) {
-        event.preventDefault();
-        if (!city.value) {
-            alert('Please enter a city');
-            return;
-        }
-        getLocation().then(() => {
-            updateCurrentWeatherInformation(lat, lon);
-        });
-        
-    }
-});
 
+    city.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            event.preventDefault();
+            if (!city.value) {
+                alert('Please enter a city');
+                return;
+            }
+            getLocation().then(() => {
+                updateCurrentWeatherInformation(lat, lon);
+            });
+
+        }
+    });
 
 const logoutBtn = document.querySelector('.logout-btn');
 logoutBtn.addEventListener('click', () => {
@@ -131,3 +130,26 @@ logoutBtn.addEventListener('click', () => {
     document.cookie = `sessionToken=; expires=`;
     sessionStorage.clear();
 })
+
+
+// Function to update user data
+async function updateUserLocation() {
+    const storedUsername = sessionStorage.getItem('username');
+    if (storedUsername) {
+            // Make a fetch request to your server to get user information
+            const response = await fetch(`/api/${storedUsername}/city`);
+            const userData = await response.text();
+            // Check if the request was successful
+            if (response.ok) {
+                city.value = userData
+                getLocation().then(() => {
+                    updateCurrentWeatherInformation(lat, lon);
+                });
+            } else {
+                console.error('Error fetching user information:', userData.message);
+            }
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
+    updateUserLocation();
+});
