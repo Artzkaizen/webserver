@@ -2,17 +2,17 @@ const users = [{
     username: 'Chuka',
     password: '12345',
     city: 'berlin',
-    profilePicture: '/img/person1.jpg'
+    profilePicture: '/img/Chuka.jpg'
 }, {
     username: 'Max',
     password: 'win1',
     city: 'abuja',
-    profilePicture: '/img/person2.jpg'
+    profilePicture: '/img/Laura.jpg'
 }, {
     username: 'Laura',
     password: 'yes',
     city: 'London',
-    profilePicture: '/img/person3.jpg'
+    profilePicture: '/img/Max.jpg'
 }]
 
 module.exports = {users}
