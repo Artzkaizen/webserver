@@ -1,3 +1,4 @@
+
 let lat;
 let lon;
 const city = document.querySelector('#city');

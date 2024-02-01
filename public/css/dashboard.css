@@ -65,9 +65,11 @@ li a{
     color: #fff;
     text-decoration: none;
 }
-/*.img-wrapper{*/
-/*    border: 2px solid red;*/
-/*}*/
+.img-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 .nav-bar{
     width: 100%;
     background-color: #f0f0f0;
