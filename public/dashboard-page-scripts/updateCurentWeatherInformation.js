@@ -6,6 +6,23 @@ const apiKey = 'd9bf64b1f9361be132205f7e4c051a7f';
 const weatherUrl = (lat, lon) => `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=hourly,minutely&appid=${apiKey}`;
 const locationUrl = () => `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}`;
 
+const placeApikey = `AIzaSyB0XlRG6XLBG2Yn9vtM0kqHtvFCNMudl4g`;
+const placeApiUrl = () => `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJrTLr-GyuEmsRBfy61i59si0&fields=address_components&key=${placeApikey}`;
+
+async function initPlace () {
+    try {
+        const res = await fetch(placeApiUrl());
+        
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const resData = await res.json();
+        console.log(resData);
+    } catch (error) {
+        console.log(error);
+    }
+}
+initPlace();
 async function updateCurrentWeatherInformation(lat, lon) {
 
     try {

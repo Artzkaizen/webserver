@@ -4,7 +4,6 @@ function updateUserData() {
 
     const user = sessionStorage.getItem("username");
     userNameDisplay.innerHTML = `<p>Hello, <strong>${user}</strong></p>`
-    console.log(userImgDisplay)
     userImgDisplay.src = `/img/${user}.jpg`
 }
 document.addEventListener('DOMContentLoaded', function () {
