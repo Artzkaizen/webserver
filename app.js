@@ -1,7 +1,9 @@
-const express = require("express");
 const database = require("./database.js");
 const cookieParser = require('cookie-parser');
+const express = require("express");
 const path = require('path')
+
+
 const app = express();
 const port = 3000;
 
@@ -36,8 +38,6 @@ app.post('/api/login', (req, res) => {
     for(let i = 0; i < database.users.length; i++){
 
         const userToCheck = database.users[i];
-        // res.sendFile(path.join(__dirname, 'public', 'dashboard.html'))
-
         if (req.body.username === userToCheck.username && req.body.password === userToCheck.password) {
             // creates unique for session token login attempt
             const sessionToken = `${userToCheck.username}_${Date.now()}`;
@@ -56,23 +56,13 @@ app.get('/api/:username/city', (req, res) => {
     const username = req.params.username;
     const foundUser = database.users.find(user => user.username === username);
 
-    if (!foundUser) {
-        res.sendStatus(404);
-        return;
-    }
-
-    res.send(foundUser.city);
+    foundUser ? res.send(foundUser.city) : res.sendStatus(404);
 });
 app.get('/api/:username/profile-picture-path', (req, res) => {
     const username = req.params.username;
     const foundUser = database.users.find(user => user.username === username);
 
-    if (!foundUser) {
-        res.sendStatus(404);
-        return;
-    }
-
-    res.send(foundUser.profilePicture);
+    foundUser ? res.send(foundUser.profilePicture) : res.sendStatus(404);
 });
 app.listen(port, () => {
     console.log(`This server is running on ${port}`)

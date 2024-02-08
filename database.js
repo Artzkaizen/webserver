@@ -7,12 +7,12 @@ const users = [{
     username: 'Max',
     password: 'win1',
     city: 'abuja',
-    profilePicture: '/img/Laura.jpg'
+    profilePicture: '/img/Max.jpg'
 }, {
     username: 'Laura',
     password: 'yes',
     city: 'London',
-    profilePicture: '/img/Max.jpg'
+    profilePicture: '/img/Laura.jpg'
 }]
 
 module.exports = {users}
