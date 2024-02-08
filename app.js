@@ -3,7 +3,7 @@ const database = require("./database.js");
 const cookieParser = require('cookie-parser');
 const path = require('path')
 const app = express();
-const port = 3001;
+const port = 3000;
 
 // middleware
 app.use(express.static('public'));

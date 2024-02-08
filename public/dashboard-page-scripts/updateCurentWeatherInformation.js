@@ -3,26 +3,54 @@ let lon;
 const city = document.querySelector('#city');
 const apiKey = 'd9bf64b1f9361be132205f7e4c051a7f';
 
-const weatherUrl = (lat, lon) => `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=hourly,minutely&appid=${apiKey}`;
+const weatherUrl = (lat, lon) => `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely&appid=${apiKey}`;
 const locationUrl = () => `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}`;
 
-const placeApikey = `AIzaSyB0XlRG6XLBG2Yn9vtM0kqHtvFCNMudl4g`;
-const placeApiUrl = () => `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJrTLr-GyuEmsRBfy61i59si0&fields=address_components&key=${placeApikey}`;
+const placeApikey = 'AIzaSyB0XlRG6XLBG2Yn9vtM0kqHtvFCNMudl4g';
+const form = document.getElementById('form');
 
-async function initPlace () {
-    try {
-        const res = await fetch(placeApiUrl());
+const script = document.createElement('script');
+script.src = `https://maps.googleapis.com/maps/api/js?key=${placeApikey}&libraries=places&callback=initAutocomplete`;
+script.async = true;
+document.head.appendChild(script);
+
+let autocomplete;
+let citySearch;
+function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        city,
+        {
+            types: ['(regions)'],
+            fields: ['place_id', 'geometry', 'name', 'address_components'],
+        });
+    autocomplete.addListener('place_changed', onPlaceChanged);
+}
+
+function onPlaceChanged() {
+    const place = autocomplete.getPlace();
+    let country = place.country
+
+
+    if (!place.geometry) {
+        city.placeholder = 'Enter a city';
+    } else {
+        lat = place.geometry.location.lat();
+        lon = place.geometry.location.lng();
+        city.value = '';
         
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+        for(let i = 0; i < place.address_components.length; i++) {
+            if(place.address_components[i].types[0] === 'country') {
+               country = place.address_components[i].short_name;
+            }
         }
-        const resData = await res.json();
-        console.log(resData);
-    } catch (error) {
-        console.log(error);
+        if(country) {
+            valid_place.innerHTML = `${place.name}, ${country}`;
+        } else {
+            valid_place.innerHTML = place.name
+        }
+        updateCurrentWeatherInformation(lat, lon);
     }
 }
-initPlace();
 async function updateCurrentWeatherInformation(lat, lon) {
 
     try {
@@ -49,7 +77,8 @@ async function updateCurrentWeatherInformation(lat, lon) {
 
         // displays time of desired location
         const  currentTime = document.querySelector('.time-dt');
-        currentTime.innerHTML = currentTimeStamp.toLocaleTimeString('en-GB', {weekday: 'long',hour: 'numeric', minute: 'numeric'});
+        currentTime.innerHTML = currentTimeStamp.toLocaleTimeString('en-GB', {weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric'});
+
 
         //displays sunrise and sunset
         const sunriseTime = document.querySelector('.sunrise-time');
@@ -75,12 +104,27 @@ async function updateCurrentWeatherInformation(lat, lon) {
             max_temp[i].innerHTML = `${Math.floor(resData.daily[i].temp.max)}&degC`;
             min_temp[i].innerHTML = `${Math.floor(resData.daily[i].temp.min)}&degC`;
         });
-        // displays weekday icons
-        const dayIcon = document.querySelectorAll('.day-icon');
-        for (let i = 0; i < resData.daily.length - 1 ; i++) {
-            dayIcon[i].src = `https://openweathermap.org/img/w/${resData.daily[i].weather[0].icon}.png`;
-            dayIcon[i].alt = `${resData.daily[i].weather[0].description}`;
-        }
+       // displays weekday icons
+       const dayIcon = document.querySelectorAll('.day-icon');
+       for (let i = 0; i < resData.daily.length - 1 ; i++) {
+           dayIcon[i].src = `https://openweathermap.org/img/w/${resData.daily[i].weather[0].icon}.png`;
+           dayIcon[i].alt = `${resData.daily[i].weather[0].description}`;
+       }
+
+        // displays hourly temps
+        const hourBoxes = document.querySelectorAll('.mb-hour');
+            hourBoxes.forEach((hourBox) => {
+            hourBox.innerHTML = ''; // Clear the content of each hour box
+        });
+
+        resData.hourly.forEach((hour, i) => {
+            hourBoxes.forEach((hourBox) => {
+                const hourTimeStamp = hour.dt * 1000;
+                const myHour = new Date(hourTimeStamp);
+                const weatherIconUrl = `https://openweathermap.org/img/w/${hour.weather[0].icon}.png`
+                hourBox.innerHTML += `<div>${myHour.toLocaleTimeString('en-GB', {hour:"numeric", minute:"numeric",})}<img class="day-icon" src="${weatherIconUrl}"><br><p>${Math.round(hour.temp)}&degC<p></div>`;
+            });
+        });
 
         // displays humidity
         const humidityInput = document.querySelector('#humidity');
@@ -88,7 +132,7 @@ async function updateCurrentWeatherInformation(lat, lon) {
 
         // displays wind speed
         const windInput = document.querySelector('#wind');
-        windInput.innerHTML= `${Math.round(resData.current.wind_speed)}<span >m/h</span>`;
+        windInput.innerHTML= `${Math.round(resData.current.wind_speed * 3.6)}<span >km/h</span>`;
 
         // displays UVI
         const uvi = document.querySelector('#uvi');
@@ -96,7 +140,7 @@ async function updateCurrentWeatherInformation(lat, lon) {
 
         // displays atmosphere visibility in km
         const visibility = document.querySelector('#visibility');
-        visibility.innerHTML= `${Math.round(resData.current.visibility / 1000)}<span >km</span>`;
+        visibility.innerHTML= `${Math.round(resData.current.visibility / 1000)}<span>km</span>`;
 
         // displays weather condition
         const feelsLike = document.querySelector('#feels-like');
@@ -107,8 +151,8 @@ async function updateCurrentWeatherInformation(lat, lon) {
     }
 }
 
+const valid_place = document.querySelector('.location');
 async function getLocation() {
-    const place = document.querySelector('.location');
 
     const res = await fetch(locationUrl());
     const resData = await res.json();
@@ -121,33 +165,23 @@ async function getLocation() {
     lon = resData.coord.lon;
 
     // displays desired location
-    sessionStorage
-    place.innerHTML = resData.name;
+    valid_place.innerText = resData.name;
     city.value = '';
 }
 
-
-    city.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.keyCode === 13) {
-            event.preventDefault();
-            if (!city.value) {
-                alert('Please enter a city');
-                return;
-            }
-            getLocation().then(() => {
-                updateCurrentWeatherInformation(lat, lon);
-            });
-
+city.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+        event.preventDefault();
+        if (!city.value) {
+            alert('Please enter a city');
+            return;
         }
-    });
+        getLocation().then(() => {
+            updateCurrentWeatherInformation(lat, lon);
+        });
 
-const logoutBtn = document.querySelector('.logout-btn');
-logoutBtn.addEventListener('click', () => {
-    window.location.href = '/home'
-    document.cookie = `sessionToken=; expires=`;
-    sessionStorage.clear();
-})
-
+    }
+});
 
 // Function to update user data
 async function updateUserLocation() {

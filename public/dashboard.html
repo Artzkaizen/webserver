@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/dashboard.css">
 
     <!--Logic-->
     <script defer src="/dashboard-page-scripts/updateCurentWeatherInformation.js"></script>
-    <script src="/dashboard-page-scripts/updateUserData.js"></script>
+    <script defer src="/dashboard-page-scripts/updateCurentWeatherInformationMobile.js"></script>
+    <script defer src="/dashboard-page-scripts/updateUserData.js"></script>
+    <script defer src="/dashboard-page-scripts/logout.js"></script>
 
     <!--Icons-->
     <link rel="icon" href="/img/climate.png" type="image/x-icon">
@@ -24,35 +27,146 @@
         <div class="infos">
             <img class="icon" src="/img/weather-pictures/clear.png" alt="clear_weather">
             <h2 class="location">Please Choose a city</h2>
-            <p>Current Weather</p>
             <h1 class="text">24<span class="deg" >&degC</span></h1>
+            <div class="temp-feel-mobile">
+                <p>Feel Likes: <span id=""></span></p>
+                    <div>
+                        <i class="fa-solid fa-arrow-up"></i>
+                    <span class=""></span>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <span class=""></span>
+                    </div>
+            </div>
             <p class="time-dt">Monday 17:00</p>
+        </div>
+        <div class="mb-hour"></div>
+        <div class="mb-day">
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div >
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-day-box">
+                <p class="">Fri</p>
+                <img class="" src="/img/weather-pictures/clear.png" alt="clear_weather">
+                <div class="temp">
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        <p class="">14&deg</p>
+                    </div>
+                    <div class="temp-info">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    <p class=""></i>3&deg</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     <main>
-        <form class="dashboard-form" action="">
+        <nav class="dashboard-form" action="">
             <div class="day">
                 <p>Today</p>
                 <p>Week</p>
             </div>
             <ul>
-                <li><a class="logout-btn" href="#">Logout</a></li>
                 <li>
                     <div class="img-wrapper">
-                        <img class="user-img" src="/img/Chuka.jpg" alt="profile-pic">
-                        <p class="username">Hello, mine</p>
-
+                        <img class="user-img" src="" alt="profile-pic">
+                        <p class="username"></p>
+                        
                     </div>
+                    <li><a class="logout-btn" href="#">Logout</a></li>
                 </li>
             </ul>
-        </form>
+        </nav>
         <div class="contain-box">
             <div class="w-box">
                 <p class="day">Mon</p>
                 <img class="day-icon" src="/img/weather-pictures/clear.png" alt="clear_weather">
                 <div class="temp">
-                    <p class="max-temp">14&deg</p>
-                    <p class="min-temp">3&deg</p>
+                    <p class="max-temp"><span><i class="fa-solid fa-arrow-up"></i></span> 14&deg</p>
+                    <p class="min-temp"><span><i class="fa-solid fa-arrow-down"></i></span> 3&deg</p>
                 </div>
             </div>
             <div class="w-box">
@@ -121,7 +235,6 @@
                     <p id="wind" class="num-info">7.70<span >m/h</span></p>
                     <img src="/img/wind.png" alt="wind">
                 </div>
-                <p>WSW</p>
             </div>
             <div class="s-box">
                 <p>Sunrise & Sunset</p>
@@ -141,7 +254,6 @@
                     <p id="humidity" class="num-info">12%</p>
                     <img src="/img/humidity.png" alt="">
                 </div>
-                <p>Normal</p>
             </div>
             <div class="s-box">
                 <p>Visibility</p>
@@ -149,7 +261,6 @@
                     <p id="visibility" class="num-info">5.2<span>km/h</span></p>
                     <img src="/img/low-visibility.png" alt="">
                 </div>
-                <p>Average</p>
             </div>
             <div class="s-box">
                 <p>Feels Like</p>
@@ -157,7 +268,6 @@
                     <p id="feels-like" class="num-info">16&degC</p>
                     <img src="/img/temperature.png" alt="">
                 </div>
-                <p>Unhealthy</p>
             </div>
         </div>
     </main>
